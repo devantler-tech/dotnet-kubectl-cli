@@ -1,0 +1,39 @@
+name: Assets
+
+on:
+  schedule:
+    - cron: "59 23 * * *"
+  workflow_dispatch:
+
+jobs:
+  download-binary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ⤵️ Get Kubectl binary
+        run: |
+          ./.github/scripts/get-kubectl-binary.sh
+      - name: Generate GitHub App Token
+        uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: 🎯 Get version
+        run: |
+          BINARY_VERSION=$(./Devantler.KubectlCLI/runtimes/linux-x64/native/kubectl-linux-x64 -v)
+          echo "BINARY_VERSION=$BINARY_VERSION" >> $GITHUB_ENV
+      - name: ✍🏻 Create PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: Update Kubectl binary to ${{ env.BINARY_VERSION }}
+          title: Update Kubectl binary
+          body: |
+            This PR updates the Kubectl binary used by Devantler.KubectlCLI to ${{ env.BINARY_VERSION }}.
+          branch: update-kubectl-binary
+          delete-branch: true
+          labels: dependencies
+          reviewers: devantler
+          assignees: devantler
+          signoff: true
+          token: ${{ steps.generate-token.outputs.token }}
