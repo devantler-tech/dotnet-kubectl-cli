@@ -20,9 +20,6 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: 🎯 Get version
-        # Client Version: v1.32.0
-        # Kustomize Version: v5.5.0
-        # Server Version: v1.32.0
         run: |
           BINARY_VERSION=$(./Devantler.KubectlCLI/runtimes/linux-x64/native/kubectl-linux-x64 version | head -n 1 | sed 's/Client Version: //g')
           echo "BINARY_VERSION=$BINARY_VERSION" >> $GITHUB_ENV
