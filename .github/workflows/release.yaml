@@ -30,5 +30,5 @@ jobs:
             echo "ISSUE_EXISTS=true" >> $GITHUB_ENV
           fi
       - name: Github Action Notify Release
-        if: ${{ env.ISSUE_EXISTS }} == 'false'
+        if: env.ISSUE_EXISTS == false
         uses: nearform-actions/github-action-notify-release@v1.12.2
