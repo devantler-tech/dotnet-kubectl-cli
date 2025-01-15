@@ -30,7 +30,7 @@
 └── Devantler.KubectlCLI.Tests
     └── KubectlTests
 
-19 directories
+20 directories
 ```
 <!-- readme-tree end -->
 
