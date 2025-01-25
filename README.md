@@ -53,5 +53,5 @@ You can execute the Kubectl CLI commands using the `Kubectl` class.
 ```csharp
 using Devantler.KubectlCLI;
 
-var (exitCode, message) = await Kubectl.RunAsync(["arg1", "arg2"]);
+var (exitCode, output) = await Kubectl.RunAsync(["arg1", "arg2"]);
 ```
