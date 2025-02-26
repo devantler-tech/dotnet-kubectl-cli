@@ -26,7 +26,7 @@ public static class Kubectl
       (PlatformID.Unix, Architecture.X64, "linux-x64") => "kubectl-linux-x64",
       (PlatformID.Unix, Architecture.Arm64, "linux-arm64") => "kubectl-linux-arm64",
       (PlatformID.Win32NT, Architecture.X64, "win-x64") => "kubectl-win-x64.exe",
-      (PlatformID.Win32NT, Architecture.X64, "win-arm64") => "kubectl-win-arm64.exe",
+      (PlatformID.Win32NT, Architecture.Arm64, "win-arm64") => "kubectl-win-arm64.exe",
       _ => throw new PlatformNotSupportedException($"Unsupported platform: {Environment.OSVersion.Platform} {RuntimeInformation.ProcessArchitecture}"),
     };
     string binaryPath = Path.Combine(AppContext.BaseDirectory, binary);
